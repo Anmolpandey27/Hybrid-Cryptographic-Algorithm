@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decryption</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        .btn-custom {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+        }
+        .btn-custom:hover {
+            background-color: #c82333;
+        }
+        .integrity-breached {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-3 mb-4 text-center" style="color: #f70707;">Receiver Portal</h1>
+        <h1 class="mb-4">Retreive The Message</h1>
+        <form action="/decrypt" method="POST">
+            <div class="form-group">
+                <label for="encrypted_text">Encrypted Text:</label>
+                <p> {{  encrypted_text_hex  }}</p>
+                <!-- <input type="text" class="form-control" id="encrypted_text" name="encrypted_text" placeholder="Enter encrypted text..."> -->
+            </div>
+            <button type="submit" class="btn btn-lg btn-custom">Retreive</button>
+        </form>
+
+        {% if decrypted_plaintext %}
+        <div class="mt-4">
+            <h2>Decrypted Plaintext:</h2>
+            {% if decrypted_plaintext == 'Integrity Breached' %}
+                <p class="integrity-breached">{{ decrypted_plaintext }}</p>
+            {% else %}
+                <p>{{ decrypted_plaintext }}</p>
+                <script>alert("Message Retreived !!")</script>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
